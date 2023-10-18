@@ -570,8 +570,10 @@ public final class IndexCollection {
         LOG.error(e);
       }
     }
-
-    if (numIndexed != counters.indexed.get()) {
+    if (analyzer == null) {
+      LOG.warn("Error loading in analyzer, possibly due to Huggingface tokenizer issue.");
+    }
+    else if (numIndexed != counters.indexed.get()) {
       LOG.warn("Unexpected difference between number of indexed documents and index maxDoc.");
     }
 
